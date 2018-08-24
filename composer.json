@@ -1,0 +1,16 @@
+{
+    "name": "juffalow/slim-graphql-eloquent-example",
+    "type": "project",
+    "require": {
+        "slim/slim": "^3.10",
+        "webonyx/graphql-php": "^0.12.5",
+        "illuminate/database": "^5.6"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matej Jellus",
+            "email": "juffalow@juffalow.com"
+        }
+    ]
+}
