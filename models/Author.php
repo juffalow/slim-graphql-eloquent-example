@@ -8,7 +8,7 @@ class Author extends \models\Model {
     return self::getDatabase()->getConnection()->table('author')->where('id', $id)->first();
   }
 
-  public static function get($query, $page, $limit) {
+  public static function get($page, $limit) {
     return self::getDatabase()
     ->getConnection()
     ->table('author')
