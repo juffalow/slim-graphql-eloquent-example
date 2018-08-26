@@ -11,6 +11,30 @@ Install dependencies :
 composer install
 ```
 
+Create database for the project by importing *eloquent_example.sql* and update the *config/config.php*:
+
+```php
+<?php
+
+return [
+  'settings' => [
+    'displayErrorDetails' => true,
+    'db' => [
+      'driver' => 'mysql',
+      'host' => 'localhost',
+      'database' => 'eloquent_example',
+      'username' => 'root',
+      'password' => '',
+      'charset'   => 'utf8',
+      'collation' => 'utf8_unicode_ci',
+      'prefix'    => '',
+      'unix_socket' => '/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock',
+    ]
+  ],
+];
+
+```
+
 Run the project :
 
 ```shell
