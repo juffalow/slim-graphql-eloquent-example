@@ -2,18 +2,10 @@
 
 namespace models;
 
-class Author extends \models\Model {
+use Illuminate\Database\Eloquent\Model;
 
-  public static function getById($id) {
-    return self::getDatabase()->getConnection()->table('author')->where('id', $id)->first();
-  }
-
-  public static function get($page, $limit) {
-    return self::getDatabase()
-    ->getConnection()
-    ->table('author')
-    ->offset(($page - 1) * $limit)
-    ->limit($limit)
-    ->get();
-  }
+class Author extends Model {
+    protected $table = 'author';
+    
+    public $timestamps = false;
 }

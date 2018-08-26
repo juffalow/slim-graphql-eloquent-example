@@ -6,7 +6,7 @@ return [
         'db' => [
             'driver' => 'mysql',
             'host' => 'localhost',
-            'database' => 'example',
+            'database' => 'sequelize_example',
             'username' => 'root',
             'password' => '',
             'charset'   => 'utf8',

@@ -20,7 +20,7 @@ class Authors {
       'resolve' => function ($root, $args) {
         $page = isset($args['page']) ? $args['page'] : 1;
         $limit = isset($args['limit']) ? $args['limit'] : 10;
-        return AuthorModel::get($page, $limit);
+        return AuthorModel::query()->take($limit)->skip(($page -1) * $limit)->get();
       }
     ];
   }

@@ -13,8 +13,6 @@ $container = require('./config/container.php');
 
 $app = new \Slim\App($container);
 
-\di\AppFactory::setContainer($container);
-
 use GraphQL\GraphQL;
 
 $app->post('/graphql', function(Request $request, Response $response) {

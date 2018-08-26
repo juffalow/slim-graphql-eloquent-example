@@ -17,7 +17,7 @@ class Author {
         'id' => Type::nonNull(Type::id()),
       ],
       'resolve' => function ($root, $args) {
-        return AuthorModel::getById($args['id']);
+        return AuthorModel::find($args['id']);
       }
     ];
   }

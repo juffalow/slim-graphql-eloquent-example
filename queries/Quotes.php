@@ -20,7 +20,7 @@ class Quotes {
       'resolve' => function ($root, $args) {
         $page = isset($args['page']) ? $args['page'] : 1;
         $limit = isset($args['limit']) ? $args['limit'] : 10;
-        return QuoteModel::get($page, $limit);
+        return QuoteModel::query()->take($limit)->skip(($page -1) * $limit)->get();
       }
     ];
   }
