@@ -17,7 +17,7 @@ class Author {
         'id' => Type::nonNull(Type::id()),
       ],
       'resolve' => function ($root, $args) {
-        return AuthorModel::find($args['id']);
+        return AuthorModel::where('id',  $args['id'])->with('quotes')->first();
       }
     ];
   }

@@ -17,7 +17,7 @@ class Quote {
         'id' => Type::nonNull(Type::id()),
       ],
       'resolve' => function ($root, $args) {
-        return QuoteModel::find($args['id']);
+        return QuoteModel::where('id',  $args['id'])->first();
       }
     ];
   }
