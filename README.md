@@ -81,6 +81,18 @@ query {
 }
 ```
 
+#### Add new author
+
+```graphql
+mutation {
+  createAuthor(input:{name:"Fredrick", last_name:"Brooks"}) {
+    id
+    name
+    last_name
+  }
+}
+```
+
 ## License
 
 [MIT license](./LICENSE)

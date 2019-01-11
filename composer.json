@@ -18,7 +18,9 @@
       "di\\": "di",
       "models\\": "models",
       "queries\\": "queries",
-      "types\\": "types"
+      "types\\": "types",
+      "inputTypes\\": "inputTypes",
+      "mutations\\": "mutations"
     }
   }
 }
