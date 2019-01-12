@@ -7,8 +7,6 @@ use GraphQL\Type\Definition\Type;
 
 use types\Quote As QuoteType;
 
-use models\Quote As QuoteModel;
-
 class Quote {
   public static function get() {
     return [
@@ -16,8 +14,13 @@ class Quote {
       'args' => [
         'id' => Type::nonNull(Type::id()),
       ],
-      'resolve' => function ($root, $args) {
-        return QuoteModel::where('id',  $args['id'])->first();
+      'resolve' => function ($root, $args, $context) {
+        $id = $args['id'];
+        if (!is_numeric($args['id'])) {
+          $id = intval(substr(base64_decode($args['id']), strlen('quote')));
+        }
+    
+        return $context->repository->quote->get($id);
       }
     ];
   }

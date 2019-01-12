@@ -4,7 +4,8 @@
   "require": {
     "slim/slim": "^3.10",
     "webonyx/graphql-php": "^0.12.5",
-    "illuminate/database": "^5.6"
+    "illuminate/database": "^5.6",
+    "monolog/monolog": "^1.24"
   },
   "license": "MIT",
   "authors": [
@@ -15,12 +16,13 @@
   ],
   "autoload": {
     "psr-4": {
-      "di\\": "di",
-      "models\\": "models",
-      "queries\\": "queries",
-      "types\\": "types",
-      "inputTypes\\": "inputTypes",
-      "mutations\\": "mutations"
+      "types\\": "src\\types",
+      "queries\\": "src\\queries",
+      "models\\": "src\\models",
+      "mutations\\": "src\\mutations",
+      "repositories\\": "src\\repositories",
+      "controllers\\": "src\\controllers",
+      "resolvers\\": "src\\resolvers"
     }
   }
 }
