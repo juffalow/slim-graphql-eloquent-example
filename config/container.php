@@ -4,12 +4,38 @@ $configuration = require('config.php');
 
 $container = new \Slim\Container($configuration);
 
-$capsule = new \Illuminate\Database\Capsule\Manager;
-$capsule->addConnection($container['settings']['db']);
+$container['database'] = function($container) {
+  $capsule = new \Illuminate\Database\Capsule\Manager;
+  $capsule->addConnection($container['settings']['db']);
+  $capsule->setAsGlobal();
+  $capsule->bootEloquent();
+  return $capsule;
+};
 
-$capsule->setAsGlobal();
-$capsule->bootEloquent();
+$container['GraphQLController'] = function($container) {
+  $maxDepth = isset($container['settings']['graphql']) && isset($container['settings']['graphql']['maxDepth']) ? $container['settings']['graphql']['maxDepth'] : 15;
+  $introspection = isset($container['settings']['graphql']) && isset($container['settings']['graphql']['introspection']) ? $container['settings']['graphql']['introspection'] : true;
+  $debug = isset($container['settings']['graphql']) && isset($container['settings']['graphql']['debug']) ? $container['settings']['graphql']['debug'] : 0;
+  return new controllers\GraphQLController($container, $maxDepth, $introspection, $debug);
+};
 
-$container->database = $capsule;
+$container['AuthorRepository'] = function($container) {
+  return new repositories\AuthorRepository($container->database, $container->logger);
+};
+
+$container['QuoteRepository'] = function($container) {
+  return new repositories\QuoteRepository($container->database, $container->logger);
+};
+
+$container['logger'] = function($container) {
+  $logger = new \Monolog\Logger('graphql');
+  if (isset($container['settings']['log']) && isset($container['settings']['log']['file'])) {
+    $rotatingFileHandler = new \Monolog\Handler\RotatingFileHandler($container['settings']['log']['file']['file'], 10, $container['settings']['log']['file']['level']);
+    $rotatingFileHandler->setFormatter(new \Monolog\Formatter\JsonFormatter());
+    $logger->pushHandler($rotatingFileHandler);
+  }
+
+  return $logger;
+};
 
 return $container;

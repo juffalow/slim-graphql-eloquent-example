@@ -5,6 +5,7 @@ namespace types;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
 
+use types\Node as NodeType;
 use types\Quote as QuoteType;
 
 class Author extends ObjectType {
@@ -20,33 +21,43 @@ class Author extends ObjectType {
   private static function create() {
     return new ObjectType([
       'name' => 'Author',
+      'interfaces' => [
+        NodeType::get()
+      ],
       'fields' => function() {
         return [
           'id' => [
-            'type' => Type::id(),
+            'type' => Type::nonNull(Type::id()),
+            'description' => 'Globally unique ID of the author',
+            'resolve' => function ($author) {
+              return base64_encode("author{$author->getId()}");
+            }
+          ],
+          '_id' => [
+            'type' => Type::nonNull(Type::id()),
             'description' => 'ID of the author',
             'resolve' => function ($author) {
-              return $author->id;
+              return $author->getId();
             }
           ],
-          'name' => [
-            'type' => Type::string(),
+          'firstName' => [
+            'type' => Type::nonNull(Type::string()),
             'description' => 'Name of the author',
             'resolve' => function ($author) {
-              return $author->name;
+              return $author->getFirstName();
             }
           ],
-          'last_name' => [
-            'type' => Type::string(),
+          'lastName' => [
+            'type' => Type::nonNull(Type::string()),
             'description' => 'Last name of the author',
             'resolve' => function ($author) {
-              return $author->last_name;
+              return $author->getLastName();
             }
           ],
           'quotes' => [
             'type' => Type::listOf(QuoteType::get()),
             'description' => 'Quotes of the author',
-            'resolve' => function ($author) {
+            'resolve' => function ($author, $args, $context) {
               return $author->quotes;
             }
           ]
