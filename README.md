@@ -163,6 +163,21 @@ query {
 }
 ```
 
+### Mutations
+
+#### Create new author
+
+```graphql
+mutation {
+  createAuthor(input:{firstName:"Fredrick", lastName:"Brooks"}) {
+    id
+    _id
+    firstName
+    lastName
+  }
+}
+```
+
 ## License
 
 [MIT license](./LICENSE)

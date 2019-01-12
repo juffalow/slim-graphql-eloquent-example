@@ -1,6 +1,6 @@
 <?php
 
-namespace inputTypes;
+namespace types\inputs;
 
 use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Definition\InputObjectType;
@@ -19,11 +19,11 @@ class Author extends InputObjectType {
     return new InputObjectType([
       'name' => 'AuthorInput',
       'fields' => [
-        'name' => [
+        'firstName' => [
           'type' => Type::nonNull(Type::string()),
-          'description' => 'Name of the author',
+          'description' => 'First name of the author',
         ],
-        'last_name' => [
+        'lastName' => [
           'type' => Type::nonNull(Type::string()),
           'description' => 'Last name of the author',
         ]

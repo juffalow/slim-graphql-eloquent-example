@@ -77,8 +77,17 @@ class AuthorRepository implements AuthorRepositoryInterface {
 
   }
 
-  public function create(string $fistName, string $lastName): AuthorModel {
+  public function create(string $firstName, string $lastName): AuthorModel {
     $this->logger->debug('AuthorRepository->create', ['firstName' => $firstName, 'lastName' => $lastName]);
+
+    $id = $this->db->getConnection()
+      ->table('author')
+      ->insertGetId([
+        'name' => $firstName,
+        'last_name' => $lastName,
+      ]);
+
+    return new AuthorModel(['id' => $id, 'firstName' => $firstName, 'lastName' => $lastName]);
 
   }
 
