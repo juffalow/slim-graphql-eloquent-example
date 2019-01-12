@@ -6,7 +6,7 @@ use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
 
 use types\connections\AuthorConnection As AuthorConnectionType;
-// use types\inputs\orders\AuthorOrder as AuthorOrderType;
+use types\inputs\orders\AuthorOrder as AuthorOrderType;
 
 use resolvers\AuthorsResolver;
 
@@ -25,6 +25,10 @@ class Authors {
         ],
         'firstName' => Type::string(),
         'lastName' => Type::string(),
+        'orderBy' => [
+          'type' => Type::listOf(AuthorOrderType::get()),
+          'description' => 'Order for connection.'
+        ]
       ],
       'resolve' => function ($root, $args, $context, $resolveInfo) {
         return (new AuthorsResolver($context, $resolveInfo))->resolve($args);

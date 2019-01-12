@@ -146,6 +146,23 @@ query {
 }
 ```
 
+#### Order authors connection by first name
+
+```graphql
+query {
+  authors(orderBy:[{field:FIRST_NAME,direction:ASC}]) {
+    edges {
+      node {
+        id
+        _id
+        firstName
+        lastName
+      }
+    }
+  }
+}
+```
+
 ## License
 
 [MIT license](./LICENSE)
