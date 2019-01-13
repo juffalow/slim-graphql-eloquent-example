@@ -1,11 +1,17 @@
 <?php
 
+use controllers\GraphQLController;
+
 require './vendor/autoload.php';
 
 $container = require('./config/container.php');
 
 $app = new \Slim\App($container);
 
+/**
+ * Enable CORS for all routes
+ * Please change the `origin` header according to requirement
+ */
 $app->options('/{routes:.+}', function ($request, $response, $args) {
     return $response;
 });
@@ -18,6 +24,9 @@ $app->add(function ($req, $res, $next) {
             ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
 });
 
-$app->post('/graphql', 'GraphQLController:process');
+/**
+ * graphql routes
+ */
+$app->post('/graphql', GraphQLController::class .':process');
 
 $app->run();
