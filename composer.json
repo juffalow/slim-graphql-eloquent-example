@@ -24,5 +24,8 @@
       "controllers\\": "src\\controllers",
       "resolvers\\": "src\\resolvers"
     }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7.5"
   }
 }

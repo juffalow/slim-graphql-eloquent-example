@@ -17,7 +17,7 @@ return [
     'db' => [
       'driver' => 'mysql',
       'host' => 'localhost',
-      'database' => 'eloquent_example',
+      'database' => 'slim-graphql',
       'username' => 'root',
       'password' => '',
       'charset'   => 'utf8',
