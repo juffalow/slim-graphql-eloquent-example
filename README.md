@@ -57,7 +57,7 @@ Logging levels:
 * ERROR (400)
 * CRITICAL (500)
 * ALERT(550)
-* EMERGANCY (600)
+* EMERGENCY (600)
 
 Rotating file:
 

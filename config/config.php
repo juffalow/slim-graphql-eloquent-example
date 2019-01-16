@@ -35,7 +35,7 @@ return [
         * ERROR (400)
         * CRITICAL (500)
         * ALERT(550)
-        * EMERGANCY (600)
+        * EMERGENCY (600)
         */
         'level' => 100,
         'file' => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'logs' . DIRECTORY_SEPARATOR . 'graphql.log',
