@@ -73,12 +73,20 @@ class GraphQLController {
       'service' => new \Slim\Container([
         'logger' => $container->logger,
       ]),
+      'resolver' => new \Slim\Container([
+        'authors' => function() use($container) {
+          return $container->authorsResolver;
+        },
+        'quotes' => function() use($container) {
+          return $container->quotesResolver;
+        },
+      ]),
       'repository' => new \Slim\Container([
         'author' => function() use($container) {
-          return $container->AuthorRepository;
+          return $container->authorRepository;
         },
         'quote' => function() use($container) {
-          return $container->QuoteRepository;
+          return $container->quoteRepository;
         },
       ])
     ]);

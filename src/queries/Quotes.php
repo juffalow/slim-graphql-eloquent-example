@@ -26,7 +26,7 @@ class Quotes {
         'quote' => Type::string(),
       ],
       'resolve' => function ($root, $args, $context, $resolveInfo) {
-        return (new QuotesResolver($context, $resolveInfo))->resolve($args);
+        return $context->resolver->quotes->resolve($args);
       }
     ];
   }

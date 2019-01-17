@@ -31,7 +31,7 @@ class Authors {
         ]
       ],
       'resolve' => function ($root, $args, $context, $resolveInfo) {
-        return (new AuthorsResolver($context, $resolveInfo))->resolve($args);
+        return $context->resolver->authors->resolve($args);
       }
     ];
   }

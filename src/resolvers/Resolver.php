@@ -8,15 +8,6 @@ namespace resolvers;
  */
 abstract class Resolver {
 
-  protected $context;
-
-  protected $resolveInfo;
-
-  public function __construct(object $context, object $resolveInfo) {
-    $this->context = $context;
-    $this->resolveInfo = $resolveInfo;
-  }
-
   public abstract function resolve(array $args);
 
   /**

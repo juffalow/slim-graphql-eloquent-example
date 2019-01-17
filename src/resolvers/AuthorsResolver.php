@@ -3,6 +3,7 @@
 namespace resolvers;
 
 use resolvers\Resolver;
+use repositories\AuthorRepositoryInterface;
 
 /**
  * 
@@ -10,8 +11,10 @@ use resolvers\Resolver;
  */
 class AuthorsResolver extends Resolver {
 
-  public function __construct(object $context, object $resolveInfo) {
-    parent::__construct($context, $resolveInfo);
+  protected $authorRepository;
+
+  public function __construct(AuthorRepositoryInterface $authorRepository) {
+    $this->authorRepository = $authorRepository;
   }
 
   public function resolve(array $args) {
@@ -21,8 +24,8 @@ class AuthorsResolver extends Resolver {
     $lastName = $this->getValue($args, 'lastName');
     $orderBy = $this->getValue($args, 'orderBy', []);
 
-    $authors = $this->context->repository->author->find($first, $after, $firstName, $lastName, $orderBy);
-    $totalCount = $this->context->repository->author->count($firstName, $lastName);
+    $authors = $this->authorRepository->find($first, $after, $firstName, $lastName, $orderBy);
+    $totalCount = $this->authorRepository->count($firstName, $lastName);
     $edges = $this->nodesToEdges($authors);
 
     $endCursor = count($authors) === 0 ? null : base64_encode($authors[count($authors) - 1]->getId());

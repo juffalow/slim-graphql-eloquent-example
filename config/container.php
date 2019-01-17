@@ -19,12 +19,20 @@ $container['GraphQLController'] = function($container) {
   return new controllers\GraphQLController($container, $maxDepth, $introspection, $debug);
 };
 
-$container['AuthorRepository'] = function($container) {
+$container['authorRepository'] = function($container) {
   return new repositories\AuthorRepository($container->database, $container->logger);
 };
 
-$container['QuoteRepository'] = function($container) {
+$container['quoteRepository'] = function($container) {
   return new repositories\QuoteRepository($container->database, $container->logger);
+};
+
+$container['authorsResolver'] = function($container) {
+  return new resolvers\AuthorsResolver($container->authorRepository);
+};
+
+$container['quotesResolver'] = function($container) {
+  return new resolvers\QuotesResolver($container->quoteRepository);
 };
 
 $container['logger'] = function($container) {

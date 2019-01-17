@@ -3,6 +3,7 @@
 namespace resolvers;
 
 use resolvers\Resolver;
+use repositories\QuoteRepositoryInterface;
 
 /**
  * 
@@ -10,8 +11,10 @@ use resolvers\Resolver;
  */
 class QuotesResolver extends Resolver {
 
-  public function __construct(object $context, object $resolveInfo) {
-    parent::__construct($context, $resolveInfo);
+  protected $quoteRepository;
+
+  public function __construct(QuoteRepositoryInterface $quoteRepository) {
+    $this->quoteRepository = $quoteRepository;
   }
 
   public function resolve(array $args) {
@@ -20,8 +23,8 @@ class QuotesResolver extends Resolver {
     $quote = $this->getValue($args, 'quote');
     $orderBy = $this->getValue($args, 'orderBy', []);
 
-    $quotes = $this->context->repository->quote->find($first, $after, $quote, $orderBy);
-    $totalCount = $this->context->repository->quote->count($quote);
+    $quotes = $this->quoteRepository->find($first, $after, $quote, $orderBy);
+    $totalCount = $this->quoteRepository->count($quote);
     $edges = $this->nodesToEdges($quotes);
 
     $endCursor = count($quotes) === 0 ? null : base64_encode($quotes[count($quotes) - 1]->getId());

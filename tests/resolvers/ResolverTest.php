@@ -5,10 +5,6 @@ use resolvers\Resolver;
 use models\Author;
 
 class ExampleResolver extends Resolver {
-  public function __construct() {
-    parent::__construct((object)[], (object)[]);
-  }
-
   public function resolve(array $args) {
 
   }
