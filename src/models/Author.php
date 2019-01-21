@@ -11,7 +11,7 @@ class Author {
   /**
    * @var string
    */
-  protected $name;
+  protected $firstName;
   
   /**
    * @var string
