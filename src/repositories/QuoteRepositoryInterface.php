@@ -43,7 +43,7 @@ interface QuoteRepositoryInterface {
    * @param int $id
    * @return QuoteModel|null
    */
-  public function delete(int $id): ?QuteModel;
+  public function delete(int $id): ?QuoteModel;
 
   /**
    * 

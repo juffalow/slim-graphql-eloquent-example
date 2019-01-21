@@ -74,7 +74,7 @@ class QuoteRepository implements QuoteRepositoryInterface {
     $this->logger->debug('QuoteRepository->create', ['authorId' => $authorId, 'quote' => $quote]);
   }
 
-  public function delete(int $id): ?QuteModel {
+  public function delete(int $id): ?QuoteModel {
     $this->logger->debug('QuoteRepository->delete', ['id' => $id]);
   }
 
