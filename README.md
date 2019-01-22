@@ -42,8 +42,6 @@ Run the project :
 php -S localhost:8088
 ```
 
-Open GraphiQL in your browser [http://localhost:8088/graphql](http://localhost:8088/graphql)
-
 ## Logging
 
 There are multiple ways how to setup logging. The application now supports
