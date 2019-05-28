@@ -145,14 +145,23 @@ query {
 }
 ```
 
-#### Order authors connection by first name
+#### Order authors by first name and last name:
 
 ```graphql
 query {
-  authors(orderBy:[{field:FIRST_NAME,direction:ASC}]) {
+  authors(orderBy:[
+    {
+      field:FIRST_NAME
+      direction:ASC
+    }
+    {
+      field:LAST_NAME
+      direction:ASC
+    }
+  ]) {
     edges {
+      cursor
       node {
-        id
         _id
         firstName
         lastName
