@@ -19,16 +19,16 @@ class QuotesResolver extends Resolver {
 
   public function resolve(array $args) {
     $first = $this->getValue($args, 'first', 10);
-    $after = $this->getCursor($args, 'after');
+    $after = $this->getCursor($args, 'after', 0);
     $quote = $this->getValue($args, 'quote');
     $orderBy = $this->getValue($args, 'orderBy', []);
 
     $quotes = $this->quoteRepository->find($first, $after, $quote, $orderBy);
     $totalCount = $this->quoteRepository->count($quote);
-    $edges = $this->nodesToEdges($quotes);
+    $edges = $this->nodesToEdges($quotes, $after);
 
-    $endCursor = count($quotes) === 0 ? null : base64_encode($quotes[count($quotes) - 1]->getId());
-    $startCursor = count($quotes) === 0 ? null : base64_encode($quotes[0]->getId());
+    $endCursor = count($edges) === 0 ? null : $edges[count($edges) - 1]['cursor'];
+    $startCursor = count($edges) === 0 ? null : $edges[0]['cursor'];
 
     return [
       'totalCount' => $totalCount,

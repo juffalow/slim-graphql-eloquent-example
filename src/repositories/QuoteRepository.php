@@ -23,7 +23,7 @@ class QuoteRepository implements QuoteRepositoryInterface {
     $quote = $this->db->getConnection()
       ->table('quote')
       ->select('id',
-        'author_id AS authorId',
+        'authorId',
         'quote')
       ->where('id', $id)
       ->first();
@@ -37,11 +37,11 @@ class QuoteRepository implements QuoteRepositoryInterface {
     $connection = $this->db->getConnection()
       ->table('quote')
       ->select('id',
-        'author_id AS authorId',
+        'authorId',
         'quote')
       ->limit($first);
 
-    if ($after !== null) { $connection->where('id', '>', $after); }
+    if ($after !== null) { $connection->offset($after); }
     if ($quote !== null) { $connection->where('quote', 'like', "%{$quote}%"); }
     if ($orderBy !== null) {
       foreach($orderBy as $ob) {

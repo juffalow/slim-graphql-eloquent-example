@@ -23,8 +23,8 @@ class AuthorRepository implements AuthorRepositoryInterface {
     $author = $this->db->getConnection()
       ->table('author')
       ->select('id',
-        'name AS firstName',
-        'last_name AS lastName')
+        'firstName',
+        'lastName')
       ->where('id', $id)
       ->first();
 
@@ -37,13 +37,13 @@ class AuthorRepository implements AuthorRepositoryInterface {
     $connection = $this->db->getConnection()
       ->table('author')
       ->select('id',
-        'name AS firstName',
-        'last_name AS lastName')
+        'firstName',
+        'lastName')
       ->limit($first);
 
-    if ($after !== null) { $connection->where('id', '>', $after); }
-    if ($firstName !== null) { $connection->where('name', 'like', "%{$firstName}%"); }
-    if ($lastName !== null) { $connection->where('last_name', 'like', "{$lastName}%"); }
+    if ($after !== null) { $connection->offset($after); }
+    if ($firstName !== null) { $connection->where('firstName', 'like', "%{$firstName}%"); }
+    if ($lastName !== null) { $connection->where('lastName', 'like', "{$lastName}%"); }
     if ($orderBy !== null) {
       foreach($orderBy as $ob) {
         $connection->orderBy($ob['field'], $ob['direction']);
@@ -66,8 +66,8 @@ class AuthorRepository implements AuthorRepositoryInterface {
     $connection = $this->db->getConnection()
       ->table('author');
 
-    if ($firstName !== null) { $connection->where('name', 'like', "%{$firstName}%"); }
-    if ($lastName !== null) { $connection->where('last_name', 'like', "{$lastName}%"); }
+    if ($firstName !== null) { $connection->where('firstName', 'like', "%{$firstName}%"); }
+    if ($lastName !== null) { $connection->where('lastName', 'like', "{$lastName}%"); }
 
     return $connection->count();
   }
@@ -83,8 +83,8 @@ class AuthorRepository implements AuthorRepositoryInterface {
     $id = $this->db->getConnection()
       ->table('author')
       ->insertGetId([
-        'name' => $firstName,
-        'last_name' => $lastName,
+        'firstName' => $firstName,
+        'lastName' => $lastName,
       ]);
 
     return new AuthorModel(['id' => $id, 'firstName' => $firstName, 'lastName' => $lastName]);

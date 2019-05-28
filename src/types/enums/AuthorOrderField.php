@@ -24,11 +24,11 @@ class AuthorOrderField extends EnumType {
           'description' => 'Order authors by ID.',
         ],
         'FIRST_NAME' => [
-          'value' => 'name',
+          'value' => 'firstName',
           'description' => 'Order authors by first name.'
         ],
         'LAST_NAME' => [
-          'value' => 'last_name',
+          'value' => 'lastName',
           'description' => 'Order authors by last name.'
         ],
       ]

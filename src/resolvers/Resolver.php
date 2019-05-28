@@ -42,28 +42,32 @@ abstract class Resolver {
    * @param string $key
    * @return cursor - ID
    */
-  protected function getCursor(array $args, string $key): ?int {
+  protected function getCursor(array $args, string $key, $default = null): ?int {
     if (isset($args[$key])) {
       if (is_numeric($args[$key])) {
         return $args[$key];
       }
-      return base64_decode($args[$key]);
+      return intval(substr(base64_decode($args[$key]), 6)); // constant 6 = strlen('cursor')
     }
-    return null;
+    return $default;
   }
 
   /**
    * 
    * @param array $nodes
+   * @param int $after
+   * @return array
    */
-  protected function nodesToEdges($nodes) {
+  protected function nodesToEdges(array $nodes, int $after = 0): array {
     $edges = [];
+    $i = 1 + $after;
 
     foreach ($nodes AS $node) {
       $edges[] = [
         'node' => $node,
-        'cursor' => base64_encode($node->getId())
+        'cursor' => base64_encode("cursor{$i}")
       ];
+      $i++;
     }
 
     return $edges;

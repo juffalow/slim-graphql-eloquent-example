@@ -17,7 +17,7 @@ return [
     'db' => [
       'driver' => 'mysql',
       'host' => 'localhost',
-      'database' => 'slim-graphql',
+      'database' => 'express-graphql-example',
       'username' => 'root',
       'password' => '',
       'charset'   => 'utf8',
