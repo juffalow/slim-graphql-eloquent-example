@@ -53,7 +53,7 @@ final class QuotesResolverTest extends TestCase {
     );
 
     $this->assertEquals(
-      base64_encode(5),
+      base64_encode('cursor5'),
       $response['pageInfo']['endCursor']
     );
 
@@ -68,12 +68,12 @@ final class QuotesResolverTest extends TestCase {
     );
 
     $this->assertEquals(
-      base64_encode(1),
+      base64_encode('cursor1'),
       $response['pageInfo']['startCursor']
     );
 
     $this->assertEquals(
-      base64_encode(1),
+      base64_encode('cursor1'),
       $response['edges'][0]['cursor']
     );
 
@@ -93,7 +93,7 @@ final class QuotesResolverTest extends TestCase {
     );
 
     $this->assertEquals(
-      base64_encode(5),
+      base64_encode('cursor5'),
       $response['edges'][4]['cursor']
     );
 

@@ -37,7 +37,7 @@ class AuthorsResolver extends Resolver {
       'pageInfo' => [
         'endCursor' => $endCursor,
         'hasNextPage' => count($authors) === $first,
-        'hasPreviousPage' => $after !== null,
+        'hasPreviousPage' => $after > 0,
         'startCursor' => $startCursor
       ]
     ];

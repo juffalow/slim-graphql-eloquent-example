@@ -17,8 +17,8 @@ class ExampleResolver extends Resolver {
     return $this->getValue($array, $key, $default);
   }
 
-  public function publicNodesToEdges($nodes) {
-    return $this->nodesToEdges($nodes);
+  public function publicNodesToEdges($nodes, $after) {
+    return $this->nodesToEdges($nodes, $after);
   }
 
   public function publicGetCursor(array $args, string $key) {
@@ -81,11 +81,11 @@ final class ResolverTest extends TestCase {
 
     $this->assertEquals(
       [
-        [ 'node' => $author1, 'cursor' => base64_encode(1)],
-        [ 'node' => $author2, 'cursor' => base64_encode(2)],
-        [ 'node' => $author3, 'cursor' => base64_encode(3)],
+        [ 'node' => $author1, 'cursor' => base64_encode('cursor1')],
+        [ 'node' => $author2, 'cursor' => base64_encode('cursor2')],
+        [ 'node' => $author3, 'cursor' => base64_encode('cursor3')],
       ],
-      $resolver->publicNodesToEdges($array)
+      $resolver->publicNodesToEdges($array, 0)
     );
   }
 
@@ -94,17 +94,17 @@ final class ResolverTest extends TestCase {
 
     $this->assertEquals(
       1,
-      $resolver->publicGetCursor(['id' => 1], 'id')
+      $resolver->publicGetCursor(['cursor' => 1], 'cursor')
     );
 
     $this->assertEquals(
       2,
-      $resolver->publicGetCursor(['id' => base64_encode(2)], 'id')
+      $resolver->publicGetCursor(['cursor' => base64_encode('cursor2')], 'cursor')
     );
 
     $this->assertEquals(
       null,
-      $resolver->publicGetCursor(['id' => 3], 'notThere')
+      $resolver->publicGetCursor(['cursor' => 3], 'notThere')
     );
   }
 }

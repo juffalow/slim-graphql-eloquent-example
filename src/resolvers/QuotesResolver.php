@@ -36,7 +36,7 @@ class QuotesResolver extends Resolver {
       'pageInfo' => [
         'endCursor' => $endCursor,
         'hasNextPage' => count($quotes) === $first,
-        'hasPreviousPage' => $after !== null,
+        'hasPreviousPage' => $after > null,
         'startCursor' => $startCursor
       ]
     ];
