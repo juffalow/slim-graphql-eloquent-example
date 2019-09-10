@@ -2,9 +2,7 @@
 
 namespace queries;
 
-use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
-
 use types\Author As AuthorType;
 
 class Author {
@@ -14,7 +12,7 @@ class Author {
       'args' => [
         'id' => Type::nonNull(Type::id()),
       ],
-      'resolve' => function ($root, $args, $context) {
+      'resolve' => function ($root, array $args, $context) {
         $id = $args['id'];
         if (!is_numeric($args['id'])) {
           $id = intval(substr(base64_decode($args['id']), strlen('author')));

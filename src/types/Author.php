@@ -4,7 +4,6 @@ namespace types;
 
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
-
 use types\Node as NodeType;
 use types\Quote as QuoteType;
 
@@ -57,7 +56,7 @@ class Author extends ObjectType {
           'quotes' => [
             'type' => Type::listOf(QuoteType::get()),
             'description' => 'Quotes of the author',
-            'resolve' => function ($author, $args, $context) {
+            'resolve' => function ($author) {
               return $author->quotes;
             }
           ]

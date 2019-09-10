@@ -2,13 +2,8 @@
 
 namespace queries;
 
-use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
-
 use types\connections\QuoteConnection As QuoteConnectionType;
-// use types\inputs\orders\QuoteOrder as QuoteOrderType;
-
-use resolvers\QuotesResolver;
 
 class Quotes {
   public static function get() {
@@ -25,7 +20,7 @@ class Quotes {
         ],
         'quote' => Type::string(),
       ],
-      'resolve' => function ($root, $args, $context, $resolveInfo) {
+      'resolve' => function ($root, array $args, $context) {
         return $context->resolver->quotes->resolve($args);
       }
     ];

@@ -2,13 +2,9 @@
 
 namespace queries;
 
-use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
-
 use types\connections\AuthorConnection As AuthorConnectionType;
 use types\inputs\orders\AuthorOrder as AuthorOrderType;
-
-use resolvers\AuthorsResolver;
 
 class Authors {
   public static function get() {
@@ -30,7 +26,7 @@ class Authors {
           'description' => 'Order for connection.'
         ]
       ],
-      'resolve' => function ($root, $args, $context, $resolveInfo) {
+      'resolve' => function ($root, array $args, $context) {
         return $context->resolver->authors->resolve($args);
       }
     ];
