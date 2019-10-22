@@ -22,7 +22,8 @@
       "mutations\\": "src\\mutations",
       "repositories\\": "src\\repositories",
       "controllers\\": "src\\controllers",
-      "resolvers\\": "src\\resolvers"
+      "resolvers\\": "src\\resolvers",
+      "middlewares\\": "src\\middlewares"
     }
   },
   "require-dev": {
