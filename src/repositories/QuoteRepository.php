@@ -4,6 +4,7 @@ namespace repositories;
 
 use Psr\Log\LoggerInterface;
 use repositories\QuoteRepositoryInterface;
+use errors\NotFound;
 use models\Quote As QuoteModel;
 
 class QuoteRepository implements QuoteRepositoryInterface {
@@ -17,7 +18,7 @@ class QuoteRepository implements QuoteRepositoryInterface {
     $this->logger = $logger;
   }
 
-  public function get(int $id): ?QuoteModel {
+  public function get(int $id): QuoteModel {
     $this->logger->debug('QuoteRepository->get', ['id' => $id]);
 
     $quote = $this->db->getConnection()
@@ -28,7 +29,11 @@ class QuoteRepository implements QuoteRepositoryInterface {
       ->where('id', $id)
       ->first();
 
-    return $quote === null ? null : new QuoteModel((array) $quote);
+    if ($quote === null) {
+      throw new NotFound('Quote not found!');
+    }
+
+    return new QuoteModel((array) $quote);
   }
 
   public function find(int $first, ?int $after, ?string $quote, ?array $orderBy) {

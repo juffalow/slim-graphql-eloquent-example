@@ -7,13 +7,13 @@ use repositories\QuoteRepositoryInterface;
 
 class QuoteRepositoryMock implements QuoteRepositoryInterface {
 
-  public function get(int $id): ?QuoteModel {
+  public function get(int $id): QuoteModel {
 
   }
 
   public function find(int $first, ?int $after, ?string $quote, ?array $orderBy) {
     $array = [];
-    
+
     for($i = 0; $i < $first; $i++) {
       $array[] = new QuoteModel(['id' => $i + 1, 'quote' => "quote{$i}", 'authorId' => $i]);
     }
@@ -26,7 +26,7 @@ class QuoteRepositoryMock implements QuoteRepositoryInterface {
   }
 
   public function create(int $authorId, string $quote): QuoteModel {
-    
+
   }
 
   public function delete(int $id): ?QuoteModel {

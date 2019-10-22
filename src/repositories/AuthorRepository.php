@@ -4,6 +4,7 @@ namespace repositories;
 
 use Psr\Log\LoggerInterface;
 use repositories\AuthorRepositoryInterface;
+use errors\NotFound;
 use models\Author As AuthorModel;
 
 class AuthorRepository implements AuthorRepositoryInterface {
@@ -17,7 +18,7 @@ class AuthorRepository implements AuthorRepositoryInterface {
     $this->logger = $logger;
   }
 
-  public function get(int $id): ?AuthorModel {
+  public function get(int $id): AuthorModel {
     $this->logger->debug('AuthorRepository->get', ['id' => $id]);
 
     $author = $this->db->getConnection()
@@ -28,7 +29,11 @@ class AuthorRepository implements AuthorRepositoryInterface {
       ->where('id', $id)
       ->first();
 
-    return $author === null ? null : new AuthorModel((array) $author);
+    if ($author === null) {
+      throw new NotFound('Author not found!');
+    }
+
+    return new AuthorModel((array) $author);
   }
 
   public function find(int $first, ?int $after, ?string $firstName, ?string $lastName, ?array $orderBy) {

@@ -23,7 +23,8 @@
       "repositories\\": "src\\repositories",
       "controllers\\": "src\\controllers",
       "resolvers\\": "src\\resolvers",
-      "middlewares\\": "src\\middlewares"
+      "middlewares\\": "src\\middlewares",
+      "errors\\": "src\\errors"
     }
   },
   "require-dev": {

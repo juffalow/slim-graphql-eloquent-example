@@ -7,13 +7,13 @@ use repositories\AuthorRepositoryInterface;
 
 class AuthorRepositoryMock implements AuthorRepositoryInterface {
 
-  public function get(int $id): ?AuthorModel {
+  public function get(int $id): AuthorModel {
 
   }
 
   public function find(int $first, ?int $after, ?string $firstName, ?string $lastName, ?array $orderBy) {
     $array = [];
-    
+
     for($i = 0; $i < $first; $i++) {
       $array[] = new AuthorModel(['id' => $i + 1, 'firstName' => "firstName{$i}", 'lastName' => "lastName{$i}"]);
     }
@@ -26,7 +26,7 @@ class AuthorRepositoryMock implements AuthorRepositoryInterface {
   }
 
   public function create(string $fistName, string $lastName): AuthorModel {
-    
+
   }
 
   public function delete(int $id): ?AuthorModel {
