@@ -1,7 +1,6 @@
 # Slim, GraphQL and Eloquent example
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?maxAge=2592000)](https://github.com/juffalow/slim-graphql-eloquent-example/blob/master/LICENSE)
-[![Build Status](https://travis-ci.org/juffalow/slim-graphql-eloquent-example.svg?branch=master)](https://travis-ci.org/juffalow/slim-graphql-eloquent-example)
 [![codecov](https://codecov.io/gh/juffalow/slim-graphql-eloquent-example/branch/master/graph/badge.svg)](https://codecov.io/gh/juffalow/slim-graphql-eloquent-example)
 
 ## How to run the project
@@ -184,6 +183,18 @@ mutation {
     lastName
   }
 }
+```
+
+## Tests
+
+Run PHPUnit:
+
+```shell
+./vendor/bin/phpunit
+
+# or
+
+./vendor/bin/phpunit --bootstrap ./vendor/autoload.php --testdox tests
 ```
 
 ## License
