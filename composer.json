@@ -1,5 +1,6 @@
 {
   "name": "juffalow/slim-graphql-eloquent-example",
+  "description": "Example project how to use Slim, GraphQL and Eloquent",
   "type": "project",
   "require": {
     "slim/slim": "^3.10",
