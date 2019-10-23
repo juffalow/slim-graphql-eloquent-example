@@ -1,0 +1,25 @@
+name: Test
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Validate composer.json and composer.lock
+      run: composer validate
+
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress --no-suggest
+
+    - name: Run tests
+      run: ./vendor/bin/phpunit
+      
+    - name: Upload code coverage
+      env:
+        TOKEN: ${{ secrets.CODE_COVERAGE_UPLOAD_TOKEN }}
+      run: CODECOV_TOKEN="$TOKEN" bash <(curl -s https://codecov.io/bash)
