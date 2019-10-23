@@ -18,6 +18,9 @@ jobs:
 
     - name: Run tests
       run: ./vendor/bin/phpunit
+
+    - name: Run PHP Static Analysis Tool
+      run: ./vendor/bin/phpstan analyse src --level=1
       
     - name: Upload code coverage
       env:

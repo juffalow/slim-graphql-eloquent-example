@@ -197,6 +197,12 @@ Run PHPUnit:
 ./vendor/bin/phpunit --bootstrap ./vendor/autoload.php --testdox tests
 ```
 
+Use PHP Stan to analyse php files for basic errors:
+
+```shell
+./vendor/bin/phpstan analyse src
+```
+
 ## License
 
 [MIT license](./LICENSE)

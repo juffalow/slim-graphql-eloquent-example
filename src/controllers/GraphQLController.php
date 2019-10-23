@@ -22,9 +22,7 @@ class GraphQLController {
 
   protected $introspection;
 
-  protected $timeStart;
-
-  protected $executionTime;
+  protected $debug;
 
   public function __construct($container, int $maxDepth = 15, bool $introspection = true, int $debug = 0) {
     $this->container = $container;
