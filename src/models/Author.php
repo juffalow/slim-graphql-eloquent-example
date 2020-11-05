@@ -2,17 +2,17 @@
 
 namespace models;
 
-class Author {
+use models\AuthorModelInterface;
+
+class Author implements AuthorModelInterface {
   /**
    * @var int
    */
   protected $id;
-
   /**
    * @var string
    */
   protected $firstName;
-  
   /**
    * @var string
    */

@@ -2,17 +2,17 @@
 
 namespace models;
 
-class Quote {
+use models\QuoteModelInterface;
+
+class Quote implements QuoteModelInterface {
   /**
    * @var int
    */
   protected $id;
-
   /**
    * @var string
    */
   protected $quote;
-  
   /**
    * @var int
    */
@@ -32,7 +32,7 @@ class Quote {
     return $this->quote;
   }
 
-  public function getAuthorId(): string {
+  public function getAuthorId(): int {
     return $this->authorId;
   }
 }
