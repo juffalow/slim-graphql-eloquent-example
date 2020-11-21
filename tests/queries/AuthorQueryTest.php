@@ -21,7 +21,9 @@ EOD;
     $context = $this->getContext();
 
     $result = GraphQL::executeQuery($schema, $query, null, $context, null);
-    $output = $result->toArray(0);
+    $output = $result->toArray(1);
+
+    print_r($output);
 
     $this->assertArrayHasKey('data', $output);
     $this->assertArrayNotHasKey('errors', $output);
