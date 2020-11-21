@@ -39,7 +39,9 @@ jobs:
     - name: Init and seed database
       env:
         PORT: ${{ job.services.mariadb.ports[3306] }}
-      run: mysql -h"127.0.0.1" -P"$PORT" -u user -p password test < database.sql
+      run: |
+        cat database.sql
+        mysql -h"127.0.0.1" -P"$PORT" --user="user" --password="password" test < database.sql
 
     - name: Rename config
       env:
