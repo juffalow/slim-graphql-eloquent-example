@@ -7,6 +7,18 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    services:
+      mariadb:
+        image: mariadb:latest
+        ports:
+          - 3306
+        env:
+          MYSQL_USER: user
+          MYSQL_PASSWORD: password
+          MYSQL_DATABASE: test
+          MYSQL_ROOT_PASSWORD: password
+        options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3
+
     steps:
     - uses: actions/checkout@v1
 
@@ -16,12 +28,28 @@ jobs:
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress --no-suggest
 
+    - name: Verify MariaDB connection
+      env:
+        PORT: ${{ job.services.mariadb.ports[3306] }}
+      run: |
+        while ! mysqladmin ping -h"127.0.0.1" -P"$PORT" --silent; do
+          sleep 1
+        done
+
+    - name: Rename config
+      env:
+        PORT: ${{ job.services.mariadb.ports[3306] }}
+      run: |
+        sed "s/3306/$PORT/g" config/config.example.php > config/output.php
+        rm config/config.php
+        mv config/output.php config/config.php
+
     - name: Run tests
       run: ./vendor/bin/phpunit
 
     - name: Run PHP Static Analysis Tool
       run: ./vendor/bin/phpstan analyse src --level=1
-      
+
     - name: Upload code coverage
       env:
         TOKEN: ${{ secrets.CODE_COVERAGE_UPLOAD_TOKEN }}
